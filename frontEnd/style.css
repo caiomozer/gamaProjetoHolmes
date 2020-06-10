@@ -1,6 +1,6 @@
 /* Ajusta fundo da tela*/
 body {
-    background-color: lightgrey;
+    background-color: blue;
 }
 
 /* Menu lateral */
@@ -43,10 +43,12 @@ body {
   
 /* Style page content */
 .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
+    margin: 240px 39em 140px 50em;
+    padding: 20px 10px;
     position: relative;
-    
+    text-align: center;
+    background: #806400;
+    border-radius: 1em;
 }
 
 .main .login-box h4 {
@@ -61,7 +63,8 @@ body {
     background-color: darkblue;
     border-radius: 8px;
     border: none;
-    padding: 10px 14px;
+    padding: 3px 21px;
+    margin: 10px 0px 0px 0px;
 }
 
 .button a {
@@ -78,8 +81,20 @@ body {
     .sidenav a {font-size: 18px;}
 }
 
+.login-box {
+    margin-top: 2em;
+    margin-bottom: 20px;
+}
 
+.content {
+    text-align: center;
+}
 
+h1 {
+    font-size: 1.7rem;
+}
 
-
-
+.input-text{
+    width: 235px;
+    text-align: center;
+}
