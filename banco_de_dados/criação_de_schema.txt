@@ -1,0 +1,72 @@
+códigos de criação do banco de dados do local host
+
+instancia msql57
+
+//// criação do schema ////
+
+// nome do schema: holmes
+
+CREATE SCHEMA `holmes` ;
+
+///// para a história 1 (tela de login) /////
+
+//criação da tabela colaborador
+
+--------------------------------------
+//tabela com os dados do colaborador, sendo eles:
+
+//idcolaborador (pertencente a tabela, para efeito de organização e consulta), 
+
+//nome do colaborador, 
+
+//racf (esta vairável pode ser definida como unique), 
+
+//funcional (esta variável pode servir como unique), 
+
+//setor (onde o colaborador esta trabalhando serve com FK),  
+
+//maquina (variavel que serve como FK), 
+
+//senha (que deve ser verificada para efeito de login)
+----------------------------------------------
+
+///CODIGO DE CRIAÇÃO DA TABELA *************
+
+-----------------------------------------------
+CREATE TABLE `holmes`.`colaborador` (
+  `idcolaborador` INT NOT NULL,
+  `racf` VARCHAR(255) NOT NULL,
+  `funcional` INT NOT NULL,
+  `setor` VARCHAR(255) NOT NULL,
+  `nome_colaborador` VARCHAR(255) NOT NULL,
+  `maquina` VARCHAR(255) NOT NULL,
+  `senha` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`idcolaborador`),
+  UNIQUE INDEX `racf_UNIQUE` (`racf` ASC),
+  UNIQUE INDEX `funcional_UNIQUE` (`funcional` ASC),
+  UNIQUE INDEX `senha_UNIQUE` (`senha` ASC))
+COMMENT = 'tabela com os dados do colaborador, sendo eles: id (pertencente a tabela, para efeito de organização e consulta), nome do colaborador, racf (esta vairável pode ser definida como unique), funcional (esta variável pode servir como unique), Setor (onde o colaborador esta trabalhando serve com FK),  maquina (variavel que serve como FK), e a senha (que deve ser verificada para efeito de login)';
+
+
+-----------------------------------------------
+
+//// TESTE DE INSERÇÃO DA TABELA PELO MYSQL ****
+
+----------------------------------------------
+
+COMANDO DE INSERÇÃO
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha` ) VALUES ('1', 'samarga', '987287653', 'Tecnologia','Samuel','800000054403','teste')
+
+
+
+----------------------------------------------
+
+//// ALTERAÇÃO DE CAMPOS DA TABELA COLABORADOR **
+
+----------------------------------------------
+ALTER TABLE `holmes`.`colaborador` 
+CHANGE COLUMN `setor` `setor` VARCHAR(255) NULL ,
+CHANGE COLUMN `maquina` `maquina` VARCHAR(255) NULL ,
+CHANGE COLUMN `senha` `senha` VARCHAR(255) NULL ;
+
