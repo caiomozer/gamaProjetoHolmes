@@ -183,3 +183,115 @@ INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`ju
 // quinta inclusão de dados
 
 INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('5', 'Andre', 'Marketing', 'mudança de area','2020-06-12');
+
+
+
+----------------------------
+
+// alteração nos campos da coluna usuário, de nome para ID
+
+----------------------------
+
+UPDATE `holmes`.`solicitacao` SET `usuario` = '1' WHERE (`idsolicitacao` = '1');
+UPDATE `holmes`.`solicitacao` SET `usuario` = '2' WHERE (`idsolicitacao` = '2');
+UPDATE `holmes`.`solicitacao` SET `usuario` = '3' WHERE (`idsolicitacao` = '3');
+UPDATE `holmes`.`solicitacao` SET `usuario` = '4' WHERE (`idsolicitacao` = '4');
+UPDATE `holmes`.`solicitacao` SET `usuario` = '5' WHERE (`idsolicitacao` = '5');
+
+----------------------------
+
+// alteração no nome da coluna usuário, para colaborador_id
+
+----------------------------
+
+ALTER TABLE `holmes`.`solicitacao` 
+CHANGE COLUMN `usuario` `colaborador_id` VARCHAR(45) NOT NULL ;
+
+
+-------------------------------------------
+
+/* alteração na tabela solictacao: o campo novo depto recebe o id do depto da tabela departamento */
+
+----------------------------------------------
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '3' WHERE (`idsolicitacao` = '1');
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '2' WHERE (`idsolicitacao` = '2');
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '1' WHERE (`idsolicitacao` = '3');
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '3' WHERE (`idsolicitacao` = '4');
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '2' WHERE (`idsolicitacao` = '5');
+
+
+
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '1');
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '2');
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '3');
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '4');
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '5');
+
+ALTER TABLE `holmes`.`solicitacao` 
+CHANGE COLUMN `novo_depto` `novo_depto_id` VARCHAR(45) NULL DEFAULT NULL ;
+
+
+
+
+
+---------------------------------------------
+
+/// Criação da tabela departamento
+
+---------------------------------------------
+
+CREATE TABLE `holmes`.`departamento` (
+  `id` INT NOT NULL,
+  `departamento` VARCHAR(45) NULL,
+  `vlan` INT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  UNIQUE INDEX `departamento_UNIQUE` (`departamento` ASC),
+  UNIQUE INDEX `vlan_UNIQUE` (`vlan` ASC))
+COMMENT = 'Esta tabela contem as vlans dos departamentos incluido o nome dos departamentos';
+
+
+
+ALTER TABLE `holmes`.`departamento` 
+CHANGE COLUMN `departamento` `departamento` VARCHAR(80) NULL DEFAULT NULL ,
+CHANGE COLUMN `vlan` `vlan` INT(20) NULL DEFAULT NULL ;
+
+
+ALTER TABLE `holmes`.`departamento` 
+CHANGE COLUMN `vlan` `vlan` VARCHAR(20) NULL DEFAULT NULL ;
+
+
+--------------------------------
+
+/// alteração na tabela departamento
+
+---------------------------------
+
+ALTER TABLE `holmes`.`solicitacao` 
+ADD COLUMN `depto_atual_id` VARCHAR(45) NULL AFTER `data_solicitacao`;
+
+
+------------------------------------
+
+//// inserção de dados na tabela departamento
+
+------------------------------------
+
+INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('1', 'Financeiro/Operações', '192.168.0');
+
+
+// segunda inclusão de dados
+
+INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('2', 'Financeiro / Custos', '192.168.1');
+
+
+
+// terceira inclusão de dados
+
+INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('3', 'Tecnologia / Dev', '192.168.2');
+
+
+// quarta inclusão de dados
+
+INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('4', 'Tecnologia/Servidores', '192.168.3');
+
