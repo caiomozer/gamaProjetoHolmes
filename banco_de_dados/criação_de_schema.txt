@@ -70,3 +70,21 @@ CHANGE COLUMN `setor` `setor` VARCHAR(255) NULL ,
 CHANGE COLUMN `maquina` `maquina` VARCHAR(255) NULL ,
 CHANGE COLUMN `senha` `senha` VARCHAR(255) NULL ;
 
+----------------------------------------------
+
+ 
+
+//// ALTERAÇÃO DE CAMPOS DA TABELA COLABORADOR **
+
+ 
+
+----------------------------------------------
+
+ 
+
+ALTER TABLE `holmes`.`colaborador` 
+ADD COLUMN `email` VARCHAR(45) NULL AFTER `senha`,
+CHANGE COLUMN `racf` `racf` VARCHAR(45) NOT NULL ,
+CHANGE COLUMN `setor` `setor` VARCHAR(100) NULL DEFAULT NULL ,
+CHANGE COLUMN `maquina` `maquina` VARCHAR(45) NULL DEFAULT NULL ;
+
