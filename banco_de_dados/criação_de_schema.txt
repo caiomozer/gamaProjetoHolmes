@@ -88,3 +88,98 @@ CHANGE COLUMN `racf` `racf` VARCHAR(45) NOT NULL ,
 CHANGE COLUMN `setor` `setor` VARCHAR(100) NULL DEFAULT NULL ,
 CHANGE COLUMN `maquina` `maquina` VARCHAR(45) NULL DEFAULT NULL ;
 
+
+----------------------------------------------
+ 
+//// INSERÇÃO DE DADOS NA TABELA COLABORADOR **
+
+ ----------------------------------------------
+
+// feita a deleção da primeira linha
+
+DELETE FROM `holmes`.`colaborador` WHERE (`idcolaborador` = '1');
+
+// inclusão de dados novamente com o campo email
+
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('1', 'samarga', '987287653', 'Tecnologia','Samuel','800000054403','teste', 'email@testedabase.com');
+
+
+// segunda inclusão de dados
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('2', 'caiomozer', '987288333', 'Tecnologia','Caio','800000055506','teste2', 'email2@testedabase.com');
+
+// terceira inclusão de dados
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('3', 'marcelogaldino', '987290555', 'Tecnologia','Marcelo','800000055607','teste3', 'email3@testedabase.com');
+
+// quarta inclusão de dados
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('4', 'marciareis', '987296777', 'Tecnologia','Marcia','800000066808','teste4', 'email4@testedabase.com');
+
+// quarta inclusão de dados
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('5', 'andremodolin', '987298490', 'Tecnologia','Andre','800000077503','teste5', 'email5@testedabase.com');
+
+
+************************************************
+
+//// CRIAÇÃO DA TABELA DE SOLICITAÇÕES
+
+************************************************
+
+CREATE TABLE `holmes`.`solicitacao` (
+  `idsolicitacao` INT NOT NULL,
+  `usuario` VARCHAR(45) NOT NULL,
+  `novo_depto` VARCHAR(45) NULL,
+  `justificativa` VARCHAR(255) NULL,
+  `data_solicitacao` DATE NULL,
+  PRIMARY KEY (`idsolicitacao`),
+  UNIQUE INDEX `usuario_UNIQUE` (`usuario` ASC),
+  UNIQUE INDEX `novo_depto_UNIQUE` (`novo_depto` ASC),
+  UNIQUE INDEX `data_solicitacao_UNIQUE` (`data_solicitacao` ASC))
+COMMENT = 'tabela onde deve conter o historico de solictações do usuário';
+
+--------------------------
+
+// Alteração do campo data_solicitacao sem index unique
+
+-----------------------------
+
+
+ALTER TABLE `holmes`.`solicitacao` 
+DROP INDEX `data_solicitacao_UNIQUE` ;
+
+ALTER TABLE `holmes`.`solicitacao` 
+DROP INDEX `novo_depto_UNIQUE` ;
+
+
+
+
+-------------------------------------
+
+// inserção de dados na tabela de solicitação
+
+-------------------------------------
+
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('1', 'Samuel', 'Financeiro', 'mudança de area','2020-06-12');
+
+
+// segunda inclusão de dados
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('2', 'Caio', 'Juridico', 'mudança de area','2020-06-12');
+
+
+// terceira inclusão de dados
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('3', 'Marcelo', 'Financeiro', 'mudança de area','2020-06-12');
+
+// quarta inclusão de dados
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('4', 'Marcia', 'Contabil', 'mudança de area','2020-06-12');
+
+
+// quinta inclusão de dados
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('5', 'Andre', 'Marketing', 'mudança de area','2020-06-12');
