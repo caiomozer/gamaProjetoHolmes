@@ -74,11 +74,7 @@ CHANGE COLUMN `senha` `senha` VARCHAR(255) NULL ;
 
  
 
-<<<<<<< HEAD
 //// ALTERAÇÃO DE CAMPOS inclusaõ do campo email e alteração do tamanho do campo DA TABELA COLABORADOR **
-=======
-//// ALTERAÇÃO DE CAMPOS DA TABELA COLABORADOR **
->>>>>>> upstream/master
 
  
 
@@ -92,7 +88,6 @@ CHANGE COLUMN `racf` `racf` VARCHAR(45) NOT NULL ,
 CHANGE COLUMN `setor` `setor` VARCHAR(100) NULL DEFAULT NULL ,
 CHANGE COLUMN `maquina` `maquina` VARCHAR(45) NULL DEFAULT NULL ;
 
-<<<<<<< HEAD
 ----------------------------------------------
 
  
@@ -111,8 +106,6 @@ UPDATE `holmes`.`colaborador` SET `maquina` = '3' WHERE (`idcolaborador` = '3');
 UPDATE `holmes`.`colaborador` SET `maquina` = '4' WHERE (`idcolaborador` = '4');
 UPDATE `holmes`.`colaborador` SET `maquina` = '5' WHERE (`idcolaborador` = '5');
 
-=======
->>>>>>> upstream/master
 
 ----------------------------------------------
  
@@ -207,7 +200,6 @@ INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`ju
 
 // quinta inclusão de dados
 
-<<<<<<< HEAD
 INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('5', 'Andre', 'Marketing', 'mudança de area','2020-06-12');
 
 
@@ -395,6 +387,3 @@ INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `nu
 INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('4', '800000066808', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8323A');
 
 INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('5', '800000077503', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8324A');
-=======
-INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('5', 'Andre', 'Marketing', 'mudança de area','2020-06-12');
->>>>>>> upstream/master

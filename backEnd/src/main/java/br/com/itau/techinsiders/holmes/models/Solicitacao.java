@@ -2,25 +2,32 @@ package br.com.itau.techinsiders.holmes.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Solicitacao implements Serializable{
-    
-    private static final long serialVersionUID = -6836350488839965232L;
+
+
+    private static final long serialVersionUID = -811123336526315837L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idsolicitacao")
     private Long id;
 
-    @Column(name = "colaborador")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="usuario", referencedColumnName="idcolaborador")
     private Colaborador colaborador;
 
-    @Column(name = "setor")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="novo_depto", referencedColumnName="idsetor")
     private Setor novoSetor;
 
     @Column(name = "justificativa")
@@ -29,7 +36,7 @@ public class Solicitacao implements Serializable{
     @Column(name = "comando")
     private String comando;
 
-    @Column(name = "data")
+    @Column(name = "data_solicitacao")
     private String data;
 
     // metodos get/set
