@@ -210,7 +210,7 @@ CHANGE COLUMN `usuario` `colaborador_id` VARCHAR(45) NOT NULL ;
 
 -------------------------------------------
 
-/* alteração na tabela solictacao: o campo novo depto recebe o id do depto da tabela departamento */
+/* alteração na tabela solictacao: o campo novo depto recebe o id do depto da tabela departamento  inserção de campo depto_atual_id */
 
 ----------------------------------------------
 UPDATE `holmes`.`solicitacao` SET `novo_depto` = '3' WHERE (`idsolicitacao` = '1');
@@ -229,6 +229,16 @@ UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` 
 
 ALTER TABLE `holmes`.`solicitacao` 
 CHANGE COLUMN `novo_depto` `novo_depto_id` VARCHAR(45) NULL DEFAULT NULL ;
+
+ALTER TABLE `holmes`.`solicitacao` 
+ADD COLUMN `comando` VARCHAR(255) NULL AFTER `depto_atual_id`;
+
+
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.2; exit' WHERE (`idsolicitacao` = '1');
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.1; exit' WHERE (`idsolicitacao` = '2');
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.0; exit' WHERE (`idsolicitacao` = '3');
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.2; exit' WHERE (`idsolicitacao` = '4');
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.1; exit' WHERE (`idsolicitacao` = '5');
 
 
 
@@ -295,3 +305,11 @@ INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('3', 
 
 INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('4', 'Tecnologia/Servidores', '192.168.3');
 
+
+
+
+
+
+switchport vlan 192.168.3; interface range 8320A 192.168.2; exit
+switchport vlan 192.168.3; interface range 8320A 192.168.1; exit
+switchport vlan 192.168.3; interface range 8320A 192.168.0; exit
