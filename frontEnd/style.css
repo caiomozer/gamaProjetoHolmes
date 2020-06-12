@@ -64,7 +64,7 @@ a.links{
 /* content que contem os formulários */
 .content{
   width: 500px;
-  margin: 20% auto;
+  margin: 15% auto;
   position: relative;   
 }
 
@@ -140,7 +140,8 @@ input[type="submit"]{
   color: #fff;
   font-size: 20px;  
   border: 1px solid #fff;   
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
+  margin-top: 5%;  
   text-shadow: 0 1px 1px #333;
   
   -webkit-border-radius: 5px;
@@ -149,7 +150,7 @@ input[type="submit"]{
   transition: all 0.2s linear;
 }
 input[type="submit"]:hover{
-  background: #4ab3c6;
+  background: #f5c979;
 }
 
 /*marcando os links para mudar de um formulário para outro */
@@ -194,8 +195,8 @@ input[type="submit"]:hover{
   position: absolute;
   top: 0px;
   width: 88%;   
-  padding: 18px 6% 60px 6%;
-  margin: 0 0 35px 0;
+  padding: 18px 6% 22px 6%;
+  margin: 0 0 35px 15%;
   background: #000000;
   border: 1px solid rgba(147, 184, 189,0.8);
   
