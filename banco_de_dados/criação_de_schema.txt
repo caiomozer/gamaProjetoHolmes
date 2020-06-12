@@ -74,7 +74,7 @@ CHANGE COLUMN `senha` `senha` VARCHAR(255) NULL ;
 
  
 
-//// ALTERAÇÃO DE CAMPOS DA TABELA COLABORADOR **
+//// ALTERAÇÃO DE CAMPOS inclusaõ do campo email e alteração do tamanho do campo DA TABELA COLABORADOR **
 
  
 
@@ -87,6 +87,24 @@ ADD COLUMN `email` VARCHAR(45) NULL AFTER `senha`,
 CHANGE COLUMN `racf` `racf` VARCHAR(45) NOT NULL ,
 CHANGE COLUMN `setor` `setor` VARCHAR(100) NULL DEFAULT NULL ,
 CHANGE COLUMN `maquina` `maquina` VARCHAR(45) NULL DEFAULT NULL ;
+
+----------------------------------------------
+
+ 
+
+//// ALTERAÇÃO DE CAMPOS maquina DA TABELA COLABORADOR  **
+
+ 
+
+----------------------------------------------
+
+
+
+UPDATE `holmes`.`colaborador` SET `maquina` = '1' WHERE (`idcolaborador` = '1');
+UPDATE `holmes`.`colaborador` SET `maquina` = '2' WHERE (`idcolaborador` = '2');
+UPDATE `holmes`.`colaborador` SET `maquina` = '3' WHERE (`idcolaborador` = '3');
+UPDATE `holmes`.`colaborador` SET `maquina` = '4' WHERE (`idcolaborador` = '4');
+UPDATE `holmes`.`colaborador` SET `maquina` = '5' WHERE (`idcolaborador` = '5');
 
 
 ----------------------------------------------
@@ -244,6 +262,7 @@ UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interf
 
 
 
+
 ---------------------------------------------
 
 /// Criação da tabela departamento
@@ -310,6 +329,61 @@ INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('4', 
 
 
 
-switchport vlan 192.168.3; interface range 8320A 192.168.2; exit
-switchport vlan 192.168.3; interface range 8320A 192.168.1; exit
-switchport vlan 192.168.3; interface range 8320A 192.168.0; exit
+---------------------------------------------
+
+/// Criação da tabela maquina
+
+---------------------------------------------
+
+
+
+CREATE TABLE `holmes`.`maquina` (
+  `idmaquina` INT NOT NULL,
+  `numero_de_serie` VARCHAR(20) NULL,
+  `descricao` VARCHAR(45) NULL,
+  `numero_conector_rede` VARCHAR(45) NULL,
+  PRIMARY KEY (`idmaquina`),
+  UNIQUE INDEX `numero_de_serie_UNIQUE` (`numero_de_serie` ASC),
+  UNIQUE INDEX `idmaquina_UNIQUE` (`idmaquina` ASC));
+
+
+
+
+Maquina
+
+id: 1
+numero_de_serie:800000054403
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8320A
+
+id: 2
+numero_de_serie:800000055506
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8321A
+
+id: 3
+numero_de_serie:800000055607
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8322A
+
+id: 4
+numero_de_serie:800000066808
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8323A
+
+
+id: 5
+numero_de_serie:800000077503
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8324A
+
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('1', '800000054403', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8320A');
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('2', '800000055506', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8321A');
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('3', '800000055607', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8322A');
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('4', '800000066808', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8323A');
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('5', '800000077503', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8324A');
