@@ -11,10 +11,12 @@ import javax.persistence.Id;
 @Entity
 public class Maquina implements Serializable {
     
-    private static final long serialVersionUID = -8620252019850542752L;
+
+    private static final long serialVersionUID = 1586948938388111429L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idmaquina")
     private Long id;
 
     @Column(name = "num_serie")

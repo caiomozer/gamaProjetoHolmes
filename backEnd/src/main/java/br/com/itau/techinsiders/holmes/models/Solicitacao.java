@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Solicitacao implements Serializable{
 
+
     private static final long serialVersionUID = -811123336526315837L;
 
     @Id
@@ -22,11 +23,11 @@ public class Solicitacao implements Serializable{
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="usuario", referencedColumnName="id")
+    @JoinColumn(name="usuario", referencedColumnName="idcolaborador")
     private Colaborador colaborador;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="novo_depto", referencedColumnName="id")
+    @JoinColumn(name="novo_depto", referencedColumnName="idsetor")
     private Setor novoSetor;
 
     @Column(name = "justificativa")

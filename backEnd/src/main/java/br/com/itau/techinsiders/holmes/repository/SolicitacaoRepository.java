@@ -1,6 +1,5 @@
 package br.com.itau.techinsiders.holmes.repository;
 
-import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 

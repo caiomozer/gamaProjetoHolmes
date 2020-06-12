@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Colaborador implements Serializable {
 
+
     private static final long serialVersionUID = 1525806576074427752L;
 
     @Id
@@ -31,11 +32,11 @@ public class Colaborador implements Serializable {
     private String funcional;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="setor", referencedColumnName="id")
+    @JoinColumn(name="setor", referencedColumnName="idsetor")
     private Setor setor;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="maquina", referencedColumnName="id", unique=true)
+    @JoinColumn(name="maquina", referencedColumnName="idmaquina", unique=true)
     private Maquina maquina;
 
     @Column(name = "senha")

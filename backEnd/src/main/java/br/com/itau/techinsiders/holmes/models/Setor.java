@@ -11,10 +11,12 @@ import javax.persistence.Id;
 @Entity
 public class Setor implements Serializable {
 
-    private static final long serialVersionUID = -3446966565683527356L;
+
+    private static final long serialVersionUID = -6897524277717957878L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idsetor")
     private Long id;
     
     @Column(name = "vlan")
