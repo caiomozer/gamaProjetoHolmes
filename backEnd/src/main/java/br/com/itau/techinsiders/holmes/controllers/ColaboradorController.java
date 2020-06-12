@@ -5,10 +5,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.itau.techinsiders.holmes.models.Colaborador;
+import br.com.itau.techinsiders.holmes.models.Maquina;
 import br.com.itau.techinsiders.holmes.repository.ColaboradorRepository;
 
 @RestController
@@ -38,7 +41,26 @@ public class ColaboradorController {
     @GetMapping(path = "/inicio/{racf}")
     public Colaborador dadosColaborador(@PathVariable("racf") String racf) {
         Optional<Colaborador> optionalColaborador = colaboradorRepository.findColaboradorByRacf(racf);
-        return optionalColaborador.get();
+        if(optionalColaborador.isPresent()) {
+            Colaborador colaborador = optionalColaborador.get();
+            return colaborador;
+        } else {
+            return null;
+        }
+        
+        
+    }
+
+    @PutMapping(path = "/novasolicitacao/atualizaColaborador{id}")
+    public Colaborador atualizaColaborador(@PathVariable("id") Long id, @RequestBody Colaborador colaboradorAtualizacao) {
+        Optional<Colaborador> optionalColaborador = colaboradorRepository.findById(id);
+        if(optionalColaborador.isPresent()) {
+            Colaborador colaborador = optionalColaborador.get();
+            colaborador.setSetor(colaboradorAtualizacao.getSetor());
+            return colaborador;
+        } else {
+            return null;
+        }
     }
 
     /*

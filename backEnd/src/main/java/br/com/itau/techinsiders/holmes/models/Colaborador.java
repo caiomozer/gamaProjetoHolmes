@@ -2,22 +2,26 @@ package br.com.itau.techinsiders.holmes.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Colaborador implements Serializable {
 
-    private static final long serialVersionUID = 4100739249410479338L;
+    private static final long serialVersionUID = 1525806576074427752L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idcolaborador")
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome_colaborador")
     private String nome;
 
     @Column(name = "racf", unique = true)
@@ -26,14 +30,19 @@ public class Colaborador implements Serializable {
     @Column(name = "funcional", unique = true)
     private String funcional;
 
-    @Column(name = "setor")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="setor", referencedColumnName="id")
     private Setor setor;
 
-    @Column(name = "maquina")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="maquina", referencedColumnName="id", unique=true)
     private Maquina maquina;
 
     @Column(name = "senha")
     private String senha;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "foto")
     private String foto;
@@ -86,6 +95,13 @@ public class Colaborador implements Serializable {
     }
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFoto() {
