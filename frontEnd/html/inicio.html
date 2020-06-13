@@ -12,12 +12,9 @@
         <!-- Custom -->
         <link href="../style.css" rel="stylesheet">
         <link href="../css/styleInicio.css" rel="stylesheet">
-        <!-- Font Awesome JS -->
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     </head>
 
-    <body>
+    <body onload="dadosColaborador()">
         <!-- Side navigation -->
         <div class="sidenav">
             <h3><a href=inicio.html>_holmes</a></h3>
@@ -32,7 +29,14 @@
         <!-- Page content -->
         <div class="main">
             <h2>Essa é a página inicial</h2>
+            <div id="dadosColaborador">
+                <h4 id="nome"></h4>
+                <h4 id="racf"></h4>
+                <h4 id="departamento"></h4>
+                <h4 id="email"></h4>
+            </div>
         </div>
+        
     </body>
 
     <!-- Scripts -->

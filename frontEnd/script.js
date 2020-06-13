@@ -6,9 +6,10 @@
 // função para validar o login
 async function validarLogin() {
 
-    console.log("Entrei na funcao!");
     const racf = document.getElementById("email_login").value;
     const senha = document.getElementById("senha_login").value;
+
+    setCookie("racf", racf, 1);
 
     const options = {
         method: "GET"
@@ -27,6 +28,60 @@ async function validarLogin() {
         
     }
 
-    console.log("final da funçao");
+}
+
+// funcao para trazer dados do colaborador..
+function dadosColaborador() {
+    const racf = getCookie("racf");
+    const url = `http://localhost:8080//inicio/${racf}`;
+    
+    const options = {
+        method: "GET"
+    }
+
+    fetch(url, options)
+    .then(function (response) {
+        if (response.status == 200) {
+
+            response.json()
+                .then(function (json) {
+                    document.getElementById("nome").innerHTML = "Colaborador: " + json.nome;
+                    document.getElementById("racf").innerHTML = "RACF: " +json.racf;
+                    document.getElementById("departamento").innerHTML = "Departamento: " +json.departamento.departamento;
+                    document.getElementById("email").innerHTML = "email: " +json.email;
+                })
+                .catch(function (err) {
+                    console.error(err)
+                })
+
+        }
+    })
+    .catch(function (error) {
+        console.error(error)
+    })
+  
 
 }
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
