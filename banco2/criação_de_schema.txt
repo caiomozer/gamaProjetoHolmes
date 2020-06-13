@@ -1,0 +1,389 @@
+códigos de criação do banco de dados do local host
+
+instancia msql57
+
+//// criação do schema ////
+
+// nome do schema: holmes
+
+CREATE SCHEMA `holmes` ;
+
+///// para a história 1 (tela de login) /////
+
+//criação da tabela colaborador
+
+--------------------------------------
+//tabela com os dados do colaborador, sendo eles:
+
+//idcolaborador (pertencente a tabela, para efeito de organização e consulta), 
+
+//nome do colaborador, 
+
+//racf (esta vairável pode ser definida como unique), 
+
+//funcional (esta variável pode servir como unique), 
+
+//setor (onde o colaborador esta trabalhando serve com FK),  
+
+//maquina (variavel que serve como FK), 
+
+//senha (que deve ser verificada para efeito de login)
+----------------------------------------------
+
+///CODIGO DE CRIAÇÃO DA TABELA *************
+
+-----------------------------------------------
+CREATE TABLE `holmes`.`colaborador` (
+  `idcolaborador` INT NOT NULL,
+  `racf` VARCHAR(255) NOT NULL,
+  `funcional` INT NOT NULL,
+  `setor` VARCHAR(255) NOT NULL,
+  `nome_colaborador` VARCHAR(255) NOT NULL,
+  `maquina` VARCHAR(255) NOT NULL,
+  `senha` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`idcolaborador`),
+  UNIQUE INDEX `racf_UNIQUE` (`racf` ASC),
+  UNIQUE INDEX `funcional_UNIQUE` (`funcional` ASC),
+  UNIQUE INDEX `senha_UNIQUE` (`senha` ASC))
+COMMENT = 'tabela com os dados do colaborador, sendo eles: id (pertencente a tabela, para efeito de organização e consulta), nome do colaborador, racf (esta vairável pode ser definida como unique), funcional (esta variável pode servir como unique), Setor (onde o colaborador esta trabalhando serve com FK),  maquina (variavel que serve como FK), e a senha (que deve ser verificada para efeito de login)';
+
+
+-----------------------------------------------
+
+//// TESTE DE INSERÇÃO DA TABELA PELO MYSQL ****
+
+----------------------------------------------
+
+COMANDO DE INSERÇÃO
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha` ) VALUES ('1', 'samarga', '987287653', 'Tecnologia','Samuel','800000054403','teste')
+
+
+
+----------------------------------------------
+
+//// ALTERAÇÃO DE CAMPOS DA TABELA COLABORADOR **
+
+----------------------------------------------
+ALTER TABLE `holmes`.`colaborador` 
+CHANGE COLUMN `setor` `setor` VARCHAR(255) NULL ,
+CHANGE COLUMN `maquina` `maquina` VARCHAR(255) NULL ,
+CHANGE COLUMN `senha` `senha` VARCHAR(255) NULL ;
+
+----------------------------------------------
+
+ 
+
+//// ALTERAÇÃO DE CAMPOS inclusaõ do campo email e alteração do tamanho do campo DA TABELA COLABORADOR **
+
+ 
+
+----------------------------------------------
+
+ 
+
+ALTER TABLE `holmes`.`colaborador` 
+ADD COLUMN `email` VARCHAR(45) NULL AFTER `senha`,
+CHANGE COLUMN `racf` `racf` VARCHAR(45) NOT NULL ,
+CHANGE COLUMN `setor` `setor` VARCHAR(100) NULL DEFAULT NULL ,
+CHANGE COLUMN `maquina` `maquina` VARCHAR(45) NULL DEFAULT NULL ;
+
+----------------------------------------------
+
+ 
+
+//// ALTERAÇÃO DE CAMPOS maquina DA TABELA COLABORADOR  **
+
+ 
+
+----------------------------------------------
+
+
+
+UPDATE `holmes`.`colaborador` SET `maquina` = '1' WHERE (`idcolaborador` = '1');
+UPDATE `holmes`.`colaborador` SET `maquina` = '2' WHERE (`idcolaborador` = '2');
+UPDATE `holmes`.`colaborador` SET `maquina` = '3' WHERE (`idcolaborador` = '3');
+UPDATE `holmes`.`colaborador` SET `maquina` = '4' WHERE (`idcolaborador` = '4');
+UPDATE `holmes`.`colaborador` SET `maquina` = '5' WHERE (`idcolaborador` = '5');
+
+
+----------------------------------------------
+ 
+//// INSERÇÃO DE DADOS NA TABELA COLABORADOR **
+
+ ----------------------------------------------
+
+// feita a deleção da primeira linha
+
+DELETE FROM `holmes`.`colaborador` WHERE (`idcolaborador` = '1');
+
+// inclusão de dados novamente com o campo email
+
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('1', 'samarga', '987287653', 'Tecnologia','Samuel','800000054403','teste', 'email@testedabase.com');
+
+
+// segunda inclusão de dados
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('2', 'caiomozer', '987288333', 'Tecnologia','Caio','800000055506','teste2', 'email2@testedabase.com');
+
+// terceira inclusão de dados
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('3', 'marcelogaldino', '987290555', 'Tecnologia','Marcelo','800000055607','teste3', 'email3@testedabase.com');
+
+// quarta inclusão de dados
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('4', 'marciareis', '987296777', 'Tecnologia','Marcia','800000066808','teste4', 'email4@testedabase.com');
+
+// quarta inclusão de dados
+
+INSERT INTO `holmes`.`colaborador` (`idcolaborador`, `racf`, `funcional`,`setor`,`nome_colaborador`,`maquina`,`senha`,`email` ) VALUES ('5', 'andremodolin', '987298490', 'Tecnologia','Andre','800000077503','teste5', 'email5@testedabase.com');
+
+
+************************************************
+
+//// CRIAÇÃO DA TABELA DE SOLICITAÇÕES
+
+************************************************
+
+CREATE TABLE `holmes`.`solicitacao` (
+  `idsolicitacao` INT NOT NULL,
+  `usuario` VARCHAR(45) NOT NULL,
+  `novo_depto` VARCHAR(45) NULL,
+  `justificativa` VARCHAR(255) NULL,
+  `data_solicitacao` DATE NULL,
+  PRIMARY KEY (`idsolicitacao`),
+  UNIQUE INDEX `usuario_UNIQUE` (`usuario` ASC),
+  UNIQUE INDEX `novo_depto_UNIQUE` (`novo_depto` ASC),
+  UNIQUE INDEX `data_solicitacao_UNIQUE` (`data_solicitacao` ASC))
+COMMENT = 'tabela onde deve conter o historico de solictações do usuário';
+
+--------------------------
+
+// Alteração do campo data_solicitacao sem index unique
+
+-----------------------------
+
+
+ALTER TABLE `holmes`.`solicitacao` 
+DROP INDEX `data_solicitacao_UNIQUE` ;
+
+ALTER TABLE `holmes`.`solicitacao` 
+DROP INDEX `novo_depto_UNIQUE` ;
+
+
+
+
+-------------------------------------
+
+// inserção de dados na tabela de solicitação
+
+-------------------------------------
+
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('1', 'Samuel', 'Financeiro', 'mudança de area','2020-06-12');
+
+
+// segunda inclusão de dados
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('2', 'Caio', 'Juridico', 'mudança de area','2020-06-12');
+
+
+// terceira inclusão de dados
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('3', 'Marcelo', 'Financeiro', 'mudança de area','2020-06-12');
+
+// quarta inclusão de dados
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('4', 'Marcia', 'Contabil', 'mudança de area','2020-06-12');
+
+
+// quinta inclusão de dados
+
+INSERT INTO `holmes`.`solicitacao` (`idsolicitacao`, `usuario`, `novo_depto`,`justificativa`,`data_solicitacao`) VALUES ('5', 'Andre', 'Marketing', 'mudança de area','2020-06-12');
+
+
+
+----------------------------
+
+// alteração nos campos da coluna usuário, de nome para ID
+
+----------------------------
+
+UPDATE `holmes`.`solicitacao` SET `usuario` = '1' WHERE (`idsolicitacao` = '1');
+UPDATE `holmes`.`solicitacao` SET `usuario` = '2' WHERE (`idsolicitacao` = '2');
+UPDATE `holmes`.`solicitacao` SET `usuario` = '3' WHERE (`idsolicitacao` = '3');
+UPDATE `holmes`.`solicitacao` SET `usuario` = '4' WHERE (`idsolicitacao` = '4');
+UPDATE `holmes`.`solicitacao` SET `usuario` = '5' WHERE (`idsolicitacao` = '5');
+
+----------------------------
+
+// alteração no nome da coluna usuário, para colaborador_id
+
+----------------------------
+
+ALTER TABLE `holmes`.`solicitacao` 
+CHANGE COLUMN `usuario` `colaborador_id` VARCHAR(45) NOT NULL ;
+
+
+-------------------------------------------
+
+/* alteração na tabela solictacao: o campo novo depto recebe o id do depto da tabela departamento  inserção de campo depto_atual_id */
+
+----------------------------------------------
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '3' WHERE (`idsolicitacao` = '1');
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '2' WHERE (`idsolicitacao` = '2');
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '1' WHERE (`idsolicitacao` = '3');
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '3' WHERE (`idsolicitacao` = '4');
+UPDATE `holmes`.`solicitacao` SET `novo_depto` = '2' WHERE (`idsolicitacao` = '5');
+
+
+
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '1');
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '2');
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '3');
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '4');
+UPDATE `holmes`.`solicitacao` SET `depto_atual_id` = '4' WHERE (`idsolicitacao` = '5');
+
+ALTER TABLE `holmes`.`solicitacao` 
+CHANGE COLUMN `novo_depto` `novo_depto_id` VARCHAR(45) NULL DEFAULT NULL ;
+
+ALTER TABLE `holmes`.`solicitacao` 
+ADD COLUMN `comando` VARCHAR(255) NULL AFTER `depto_atual_id`;
+
+
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.2; exit' WHERE (`idsolicitacao` = '1');
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.1; exit' WHERE (`idsolicitacao` = '2');
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.0; exit' WHERE (`idsolicitacao` = '3');
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.2; exit' WHERE (`idsolicitacao` = '4');
+UPDATE `holmes`.`solicitacao` SET `comando` = 'switchport vlan 192.168.3; interface range 8320A 192.168.1; exit' WHERE (`idsolicitacao` = '5');
+
+
+
+
+
+
+---------------------------------------------
+
+/// Criação da tabela departamento
+
+---------------------------------------------
+
+CREATE TABLE `holmes`.`departamento` (
+  `id` INT NOT NULL,
+  `departamento` VARCHAR(45) NULL,
+  `vlan` INT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  UNIQUE INDEX `departamento_UNIQUE` (`departamento` ASC),
+  UNIQUE INDEX `vlan_UNIQUE` (`vlan` ASC))
+COMMENT = 'Esta tabela contem as vlans dos departamentos incluido o nome dos departamentos';
+
+
+
+ALTER TABLE `holmes`.`departamento` 
+CHANGE COLUMN `departamento` `departamento` VARCHAR(80) NULL DEFAULT NULL ,
+CHANGE COLUMN `vlan` `vlan` INT(20) NULL DEFAULT NULL ;
+
+
+ALTER TABLE `holmes`.`departamento` 
+CHANGE COLUMN `vlan` `vlan` VARCHAR(20) NULL DEFAULT NULL ;
+
+
+--------------------------------
+
+/// alteração na tabela departamento
+
+---------------------------------
+
+ALTER TABLE `holmes`.`solicitacao` 
+ADD COLUMN `depto_atual_id` VARCHAR(45) NULL AFTER `data_solicitacao`;
+
+
+------------------------------------
+
+//// inserção de dados na tabela departamento
+
+------------------------------------
+
+INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('1', 'Financeiro/Operações', '192.168.0');
+
+
+// segunda inclusão de dados
+
+INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('2', 'Financeiro / Custos', '192.168.1');
+
+
+
+// terceira inclusão de dados
+
+INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('3', 'Tecnologia / Dev', '192.168.2');
+
+
+// quarta inclusão de dados
+
+INSERT INTO `holmes`.`departamento` (`id`, `departamento`, `vlan`) VALUES ('4', 'Tecnologia/Servidores', '192.168.3');
+
+
+
+
+
+
+---------------------------------------------
+
+/// Criação da tabela maquina
+
+---------------------------------------------
+
+
+
+CREATE TABLE `holmes`.`maquina` (
+  `idmaquina` INT NOT NULL,
+  `numero_de_serie` VARCHAR(20) NULL,
+  `descricao` VARCHAR(45) NULL,
+  `numero_conector_rede` VARCHAR(45) NULL,
+  PRIMARY KEY (`idmaquina`),
+  UNIQUE INDEX `numero_de_serie_UNIQUE` (`numero_de_serie` ASC),
+  UNIQUE INDEX `idmaquina_UNIQUE` (`idmaquina` ASC));
+
+
+
+
+Maquina
+
+id: 1
+numero_de_serie:800000054403
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8320A
+
+id: 2
+numero_de_serie:800000055506
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8321A
+
+id: 3
+numero_de_serie:800000055607
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8322A
+
+id: 4
+numero_de_serie:800000066808
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8323A
+
+
+id: 5
+numero_de_serie:800000077503
+descricao: Notebook HP Intel i5 8Gb Memoria 500 Gb HD
+numero_conector_rede:8324A
+
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('1', '800000054403', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8320A');
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('2', '800000055506', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8321A');
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('3', '800000055607', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8322A');
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('4', '800000066808', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8323A');
+
+INSERT INTO `holmes`.`maquina` (`idmaquina`, `numero_de_serie`, `descricao`, `numero_conector_rede`) VALUES ('5', '800000077503', 'Notebook HP Intel i5 8Gb Memoria 500 Gb HD', '8324A');
