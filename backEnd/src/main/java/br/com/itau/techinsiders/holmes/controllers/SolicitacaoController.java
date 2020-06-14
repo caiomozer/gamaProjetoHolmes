@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.itau.techinsiders.holmes.models.Solicitacao;
+import br.com.itau.techinsiders.holmes.models.CriaSolicitacao;
 import br.com.itau.techinsiders.holmes.models.Colaborador;
+import br.com.itau.techinsiders.holmes.models.Departamento;
 import br.com.itau.techinsiders.holmes.repository.ColaboradorRepository;
 import br.com.itau.techinsiders.holmes.repository.SolicitacaoRepository;
+import br.com.itau.techinsiders.holmes.repository.DepartamentoRepository;
 
 @RestController
 public class SolicitacaoController {
@@ -24,8 +27,10 @@ public class SolicitacaoController {
     @Autowired
     private ColaboradorRepository colaboradorRepository;
 
+    @Autowired
+    private DepartamentoRepository departamentoRepository;
     
-    // tem que validar...
+    // validado ok!
     @GetMapping(path = "/inicio/solicitacao{racf}")
     public Iterable<Solicitacao> listarSolicitacao(@PathVariable("racf") String racf) {
         Optional<Colaborador> optionalColaborador = colaboradorRepository.findColaboradorByRacf(racf);
@@ -38,10 +43,32 @@ public class SolicitacaoController {
 
     // tem que validar...
     @PostMapping(path = "/novasolicitacao",  consumes = "application/json", produces = "application/json")
-    public Solicitacao addSolicitacao(@RequestBody Solicitacao novaSolicitacao) {
+    public Solicitacao addSolicitacao(@RequestBody CriaSolicitacao novaSolicitacao) {
+        Optional<Colaborador> optionalColaborador = colaboradorRepository.findColaboradorByRacf(novaSolicitacao.getColaboradorRacf());
+        Optional<Departamento> optionalDepartamentoAntigo = departamentoRepository.findDepartamentoByDepartamento(novaSolicitacao.getAntigoDepartamento());
+        Optional<Departamento> optionalDepartamentoNovo = departamentoRepository.findById(novaSolicitacao.getNovoDepartamentoId());
+        if(optionalColaborador.isPresent() && optionalDepartamentoAntigo.isPresent() && optionalDepartamentoNovo.isPresent()) {
+            Solicitacao solicitacao = new Solicitacao();
+            solicitacao.setColaborador(optionalColaborador.get());
+            solicitacao.setAntigoDepartamento(optionalDepartamentoAntigo.get());
+            solicitacao.setNovoDepartamento(optionalDepartamentoNovo.get());
+            solicitacao.setJustificativa(novaSolicitacao.getJustificativa());
+            
+            String comando = "switchport vlan "+optionalDepartamentoAntigo.get().getVlan()+"; interface range 8320A "+optionalDepartamentoNovo.get().getVlan()+"; exit";
+            
+            solicitacao.setComando(comando);
+            solicitacao.setData(novaSolicitacao.getData());
+            
+            Colaborador colaborador = optionalColaborador.get();
+            colaborador.setDepartamento(optionalDepartamentoNovo.get());
+            
+            Solicitacao solicitacaoInserida = solicitacaoRepository.save(solicitacao);
+            return solicitacaoInserida;
+        } else {
+            return null;
+        }
         
-        Solicitacao solicitacaoInserida = solicitacaoRepository.save(novaSolicitacao);
         
-        return solicitacaoInserida;
+        
     }
 }

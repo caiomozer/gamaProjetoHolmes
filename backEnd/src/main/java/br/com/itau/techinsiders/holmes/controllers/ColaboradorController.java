@@ -22,9 +22,9 @@ public class ColaboradorController {
     // Método validado!
     @GetMapping(path = "/index/validaColaborador")
     public boolean validaColaborador(@RequestParam("racf") final String racf, @RequestParam("senha") final String senha) {
-        final Optional<Colaborador> optionalColaborador = colaboradorRepository.findColaboradorByRacf(racf);
+        Optional<Colaborador> optionalColaborador = colaboradorRepository.findColaboradorByRacf(racf);
         if (optionalColaborador.isPresent()) {
-            final Colaborador colaborador = optionalColaborador.get();
+            Colaborador colaborador = optionalColaborador.get();
             if (colaborador.getSenha().equals(senha)) {
                 return true;
             } else {
@@ -38,10 +38,10 @@ public class ColaboradorController {
 
     //Metodo validado!
     @GetMapping(path = "/inicio/{racf}")
-    public Colaborador dadosColaborador(@PathVariable("racf") final String racf) {
-        final Optional<Colaborador> optionalColaborador = colaboradorRepository.findColaboradorByRacf(racf);
+    public Colaborador dadosColaborador(@PathVariable("racf") String racf) {
+        Optional<Colaborador> optionalColaborador = colaboradorRepository.findColaboradorByRacf(racf);
         if(optionalColaborador.isPresent()) {
-            final Colaborador colaborador = optionalColaborador.get();
+            Colaborador colaborador = optionalColaborador.get();
             return colaborador;
         } else {
             return null;
@@ -51,10 +51,10 @@ public class ColaboradorController {
     }
 
     @PutMapping(path = "/novasolicitacao/atualizaColaborador{id}")
-    public Colaborador atualizaColaborador(@PathVariable("id") final Long id, @RequestBody final Colaborador colaboradorAtualizacao) {
-        final Optional<Colaborador> optionalColaborador = colaboradorRepository.findById(id);
+    public Colaborador atualizaColaborador(@PathVariable("id") Long id, @RequestBody Colaborador colaboradorAtualizacao) {
+        Optional<Colaborador> optionalColaborador = colaboradorRepository.findById(id);
         if(optionalColaborador.isPresent()) {
-            final Colaborador colaborador = optionalColaborador.get();
+            Colaborador colaborador = optionalColaborador.get();
             colaborador.setDepartamento(colaboradorAtualizacao.getDepartamento());
             return colaborador;
         } else {

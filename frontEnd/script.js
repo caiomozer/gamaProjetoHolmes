@@ -22,7 +22,7 @@ async function validarLogin() {
     const response = await fetch(url, options);
     const text = await response.text();
     if (response.status == 200 && text === "true") {
-        window.location.replace("http://127.0.0.1:5500/frontEnd/html/inicio.html");
+        window.location.replace("http://127.0.0.1:5500/frontEnd/html/profile.html");
     } else {
         document.getElementById("login_erro").innerHTML = "Usuário não encontrado!";
         
@@ -45,10 +45,49 @@ function dadosColaborador() {
 
             response.json()
                 .then(function (json) {
-                    document.getElementById("nome").innerHTML = "Colaborador: " + json.nome;
-                    document.getElementById("racf").innerHTML = "RACF: " +json.racf;
-                    document.getElementById("departamento").innerHTML = "Departamento: " +json.departamento.departamento;
-                    document.getElementById("email").innerHTML = "email: " +json.email;
+                    document.getElementById("nome").innerHTML = json.nome;
+                    document.getElementById("racf").innerHTML = json.racf;
+                    document.getElementById("setor").innerHTML = json.departamento.departamento;
+                    setCookie("depto", json.departamento.departamento, 1);
+                    document.getElementById("func").innerHTML = json.funcional;
+                })
+                .catch(function (err) {
+                    console.error(err);
+                })
+
+        }
+    })
+    .catch(function (error) {
+        console.error(error)
+    })
+  
+    dadosSolicitacao();
+}
+
+function dadosSolicitacao() { 
+    let table = document.getElementById("tabelaSolicitacao");
+    const racf = getCookie("racf");
+    const url = `http://localhost:8080//inicio/solicitacao${racf}`;
+
+    const options = {
+        method: "GET"
+    }
+
+    fetch(url, options)
+    .then(function (response) {
+        if (response.status == 200) {
+
+            response.json()
+                .then(function (json) {
+                    console.log(json);
+                    for (var obj = 0; obj < json.length; obj++) {
+                        let linha = table.insertRow(-1);
+                        console.log(json[obj]);
+                        linha.insertCell(0).innerHTML = json[obj].data;
+                        linha.insertCell(1).innerHTML = json[obj].justificativa;
+                        linha.insertCell(2).innerHTML = json[obj].comando;
+                        linha.insertCell(3).innerHTML = "De: "+json[obj].antigoDepartamento.departamento+"; Para: "+json[obj].novoDepartamento.departamento+";" ;
+                    }
                 })
                 .catch(function (err) {
                     console.error(err)
@@ -59,10 +98,53 @@ function dadosColaborador() {
     .catch(function (error) {
         console.error(error)
     })
-  
+}
+
+
+// input de solicitacao
+function novaSolicitacao() {
+
+    const racf = getCookie("racf");
+    const antigoDepartamento = getCookie("depto");
+    const novoDepartamentoId = document.getElementById("departamentos").value;
+    const justif = document.getElementById("justificativa").value;
+    
+    let currentTime = new Date();
+    let dd = String(currentTime.getDate()).padStart(2,'0');
+    let mm = String(currentTime.getMonth() + 1).padStart(2, '0');
+    let yyyy = currentTime.getFullYear();
+
+    let data = dd+'-'+mm+'-'+yyyy;
+
+    const url = `http://localhost:8080//novasolicitacao`;
+
+    const options = {
+        method: "POST",
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({colaboradorRacf: racf,
+                            novoDepartamentoId: novoDepartamentoId,
+                            antigoDepartamento: antigoDepartamento,
+                            justificativa: justif,
+                            comando: "",
+                            data: data})
+    }
+    
+
+    fetch(url, options)
+    .then(function () {
+        alert("Solicitação enviada com sucesso");
+    })
+    .catch(function (error) {
+        alert("Erro ao enviar solicitacao.")
+        console.error(error);
+    })
 
 }
 
+
+
+
+// Cookies ~
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));

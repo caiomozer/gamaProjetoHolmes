@@ -1,8 +1,75 @@
-/* Ajusta fundo da tela*/
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: auto;
+    text-align: left;
+  }
+
+  .card label{
+    margin-left: 1%;
+    margin: 2% 0% 3% 3%;
+  }
+  
+  .title {
+    color: grey;
+    font-size: 18px;
+    margin-top: 4%;
+    margin-left: 20%;
+    display: -webkit-inline-box;
+
+  }
+
+  .funci {
+    color: grey;
+    font-size: 18px;
+    margin-left: 20%;
+    display: -webkit-inline-box;
+
+  }
+
+  .RAC {
+    color: grey;
+    font-size: 18px;
+    margin-left: 20%;
+    display: -webkit-inline-box;
+
+  }
+  
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #ffa500;
+    text-align: center;
+    cursor: pointer;
+    width: 30%;
+    font-size: 12px;
+    border-radius: 5px;
+    margin-left: 34%;
+    margin-bottom: 5%;
+  }
+  
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+  
+ 
+  .imagem {
+    width: 25%;
+    position: relative;
+    left: 7%;
+    margin-top: 6%;
+ 
+  }
+  /* Ajusta fundo da tela*/
 
 body {
 
-    background-color: white;
+    background-color: white
 
 }
 
@@ -32,6 +99,10 @@ body {
 
 }
 
+.sidenav p {
+  font-size: 12px;
+}
+
 
 
 /* Links*/
@@ -42,7 +113,7 @@ body {
 
     text-decoration: none;
 
-    font-size: 25px;
+    font-size: 20px;
 
     color: #818181;
 
@@ -128,9 +199,9 @@ a.links{
 
 .content{
 
-  width: 73%;
+  width: 500px;
 
-  margin: 0% 20%;
+  margin: 15% auto;
 
   position: relative;   
 
@@ -142,11 +213,11 @@ a.links{
 
 /* formatando o cabeçalho dos formulários */
 
-h1{
+.card h1{
 
-  font-size: 48px;
+  font-size: 25px;
 
-  color: #f6f6f7;
+  color: #808080;
 
   padding: 10px 0;
 
@@ -184,8 +255,7 @@ p{
 
   margin-bottom:15px;
 
-  color: #818181;
-  text-align: center;
+  color: #808080;
 
 }
 
@@ -197,7 +267,7 @@ p:first-child{
 
 label{
 
-  color: #f2fdff;
+  color: gray;
 
   position: relative;
 
@@ -226,6 +296,11 @@ textarea:-moz-placeholder{
   font-style: italic;
 
 } 
+
+.card input{
+  margin: 2.5% 2.5% 5% 2.5%;
+  height: 170px;
+}
 
 input {
 
@@ -269,9 +344,9 @@ input:not([type="checkbox"]){
 
 /*estilo do botão submit */
 
-input[type="submit"]{
+input[type="button"]{
 
-  width: 100%!important;
+  width: 8%;
 
   cursor: pointer;  
 
@@ -281,17 +356,19 @@ input[type="submit"]{
 
   color: #fff;
 
-  font-size: 20px;  
+  font-size: 15px;  
 
   border: 1px solid #fff;   
 
-  margin-bottom: 10px;
-
-  margin-top: 5%;  
+  margin: 1% 0% 0% 77%;
 
   text-shadow: 0 1px 1px #333;
 
-  
+  position: absolute;
+
+  left: 13%;
+
+  top: 0%;
 
   -webkit-border-radius: 5px;
 
@@ -303,7 +380,7 @@ input[type="submit"]{
 
 }
 
-input[type="submit"]:hover{
+input[type="button "]:hover{
 
   background: #f5c979;
 
@@ -548,11 +625,12 @@ input[type="submit"]:hover{
   }
 
 }
-h2{
 
-  font-size: 32px;
+h1{
 
-  color: #efa500;
+  font-size: 40px;
+
+  color: #808080;
 
   padding: 10px 0;
 
@@ -566,20 +644,60 @@ h2{
 
 }
 
+h2{
+  position: absolute;
+  top: 32%;
+  left: 30%;
+  font-weight: bold;
+}
+
 h2:after{
 
   content: ' ';
 
   display: block;
 
-  width: 100%;
+  width: 149%;
 
   height: 2px;
 
-  margin-top: 10px;
+  margin-left: -39%;
 
   background: -webkit-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
 
   background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
 
+}
+
+.cardHist {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: auto;
+    margin-top: 1%;
+    text-align: left;
+    padding: 1%;
+  }
+
+  button:hover{
+
+  background: #f5c979;
+
+}
+
+input[type="button"]:hover{
+
+  background: #f5c979;
+
+}
+
+select{
+  position: relative;
+  left: 50%;
+  border-color: gray;
+  border-radius:5px;
+}
+
+.Dep{
+  margin: 0% 0% 1% 35%;
+  display: inline-flex;
 }
